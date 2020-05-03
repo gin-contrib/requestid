@@ -20,7 +20,7 @@ func main() {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example ping request.
+	// Example / request.
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "id:"+requestid.Get(c))
 	})
