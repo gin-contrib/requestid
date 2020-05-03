@@ -22,7 +22,7 @@ func main() {
 
 	// Example ping request.
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, requestid.Get(c))
+		c.String(http.StatusOK, "id:"+requestid.Get(c))
 	})
 
 	// Listen and Server in 0.0.0.0:8080
