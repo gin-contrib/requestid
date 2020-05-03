@@ -36,6 +36,7 @@ func New(config ...Config) gin.HandlerFunc {
 
 		if rid == "" {
 			rid = cfg.Generator()
+			c.Header(headerXRequestID, rid)
 		}
 
 		c.Next()
