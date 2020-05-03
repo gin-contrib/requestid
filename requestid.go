@@ -42,3 +42,8 @@ func New(config ...Config) gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+// Get returns the request identifier
+func Get(c *gin.Context) string {
+	return c.GetHeader(headerXRequestID)
+}
