@@ -55,5 +55,14 @@ func main() {
 	// Listen and Server in 0.0.0.0:8080
 	r.Run(":8080")
 }
+```
 
+How to get the request identifier:
+
+```go
+	// Example ping request.
+	r.GET("/ping", func(c *gin.Context) {
+    id := requestid.Get(c)
+		c.String(http.StatusOK, id)
+	})
 ```
