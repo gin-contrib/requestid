@@ -16,8 +16,8 @@ type Config struct {
 	Generator func() string
 }
 
-// SetLogger initializes the logging middleware.
-func SetLogger(config ...Config) gin.HandlerFunc {
+// New initializes the RequestID middleware.
+func New(config ...Config) gin.HandlerFunc {
 	var cfg Config
 	if len(config) > 0 {
 		cfg = config[0]
