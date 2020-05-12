@@ -60,8 +60,8 @@ func main() {
 How to get the request identifier:
 
 ```go
-	// Example / request.
-	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "id:"+requestid.Get(c))
-	})
+// Example / request.
+r.GET("/", func(c *gin.Context) {
+	c.String(http.StatusOK, "id:"+requestid.Get(c))
+})
 ```
