@@ -33,12 +33,12 @@ func New(config ...Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get id from request
 		rid := c.GetHeader(headerXRequestID)
-
 		if rid == "" {
 			rid = cfg.Generator()
-			c.Header(headerXRequestID, rid)
 		}
 
+		// Set the id to ensure that the requestid is in the response
+		c.Writer.Header().Set(headerXRequestID, rid)
 		c.Next()
 	}
 }
