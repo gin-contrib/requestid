@@ -38,7 +38,7 @@ func New(config ...Config) gin.HandlerFunc {
 		}
 
 		// Set the id to ensure that the requestid is in the response
-		c.Writer.Header().Set(headerXRequestID, rid)
+		c.Header(headerXRequestID, rid)
 		c.Next()
 	}
 }
