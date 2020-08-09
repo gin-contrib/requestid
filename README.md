@@ -1,6 +1,7 @@
 # RequestID
 
-Request ID middleware for Gin Framework. Adds an indentifier to the response using the `X-Request-ID` header
+Request ID middleware for Gin Framework. Adds an indentifier to the response using the `X-Request-ID` header.
+Passes the `X-Request-ID` value back to the caller if it's sent in the request headers.
 
 ## Config
 
