@@ -1,6 +1,6 @@
 language: go
 
-job:
+jobs:
   fast_finish: true
   include:
   - go: 1.11.x
