@@ -1,6 +1,6 @@
 # RequestID
 
-[![Build Status](https://travis-ci.org/gin-contrib/requestid.svg?branch=master)](https://travis-ci.org/gin-contrib/requestid)
+[![Run Tests](https://github.com/gin-contrib/requestid/actions/workflows/go.yml/badge.svg)](https://github.com/gin-contrib/requestid/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/gin-contrib/requestid/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-contrib/requestid)
 [![Go Report Card](https://goreportcard.com/badge/github.com/gin-contrib/requestid)](https://goreportcard.com/report/github.com/gin-contrib/requestid)
 [![GoDoc](https://godoc.org/github.com/gin-contrib/requestid?status.svg)](https://godoc.org/github.com/gin-contrib/requestid)
