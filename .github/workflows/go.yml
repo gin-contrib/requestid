@@ -31,6 +31,9 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+
       - name: Run Tests
         run: |
           go test -v -covermode=atomic -coverprofile=coverage.out
