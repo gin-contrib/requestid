@@ -35,6 +35,8 @@ func New(config ...Config) gin.HandlerFunc {
 		rid := c.GetHeader(headerXRequestID)
 		if rid == "" {
 			rid = cfg.Generator()
+			// Set the id to ensure that the requestid is in the request
+			c.Request.Header.Add(headerXRequestID, rid)
 		}
 
 		// Set the id to ensure that the requestid is in the response
