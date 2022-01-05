@@ -1,6 +1,7 @@
 package requestid
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -21,7 +22,7 @@ func Test_RequestID_CreateNew(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/", nil)
+	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
@@ -34,7 +35,7 @@ func Test_RequestID_PassThru(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/", nil)
+	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	req.Header.Set(headerXRequestID, testXRequestID)
 	r.ServeHTTP(w, req)
 
