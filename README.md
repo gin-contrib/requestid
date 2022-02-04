@@ -15,21 +15,21 @@ define your custom generator function:
 ```go
 func main() {
 
-	r := gin.New()
+  r := gin.New()
 
-	r.Use(requestid.New(requestid.Config{
-		Generator: func() string {
-			return "test"
-		},
-	}))
+  r.Use(requestid.New(requestid.Config{
+    Generator: func() string {
+      return "test"
+    },
+  }))
 
-	// Example ping request.
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
-	})
+  // Example ping request.
+  r.GET("/ping", func(c *gin.Context) {
+    c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
+  })
 
-	// Listen and Server in 0.0.0.0:8080
-	r.Run(":8080")
+  // Listen and Server in 0.0.0.0:8080
+  r.Run(":8080")
 }
 ```
 
@@ -39,27 +39,27 @@ func main() {
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"time"
+  "fmt"
+  "net/http"
+  "time"
 
-	"github.com/gin-contrib/requestid"
-	"github.com/gin-gonic/gin"
+  "github.com/gin-contrib/requestid"
+  "github.com/gin-gonic/gin"
 )
 
 func main() {
 
-	r := gin.New()
+  r := gin.New()
 
-	r.Use(requestid.New())
+  r.Use(requestid.New())
 
-	// Example ping request.
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
-	})
+  // Example ping request.
+  r.GET("/ping", func(c *gin.Context) {
+    c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
+  })
 
-	// Listen and Server in 0.0.0.0:8080
-	r.Run(":8080")
+  // Listen and Server in 0.0.0.0:8080
+  r.Run(":8080")
 }
 ```
 
@@ -68,6 +68,6 @@ How to get the request identifier:
 ```go
 // Example / request.
 r.GET("/", func(c *gin.Context) {
-	c.String(http.StatusOK, "id:"+requestid.Get(c))
+  c.String(http.StatusOK, "id:"+requestid.Get(c))
 })
 ```
