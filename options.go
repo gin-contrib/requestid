@@ -8,6 +8,6 @@ type Generator func() string
 // WithGenerator set fenerator function
 func WithGenerator(g Generator) Option {
 	return func(cfg *config) {
-		cfg.Generator = g
+		cfg.generator = g
 	}
 }

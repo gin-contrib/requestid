@@ -13,13 +13,13 @@ type config struct {
 	// Optional. Default: func() string {
 	//   return uuid.New().String()
 	// }
-	Generator Generator
+	generator Generator
 }
 
 // New initializes the RequestID middleware.
 func New(opts ...Option) gin.HandlerFunc {
 	cfg := &config{
-		Generator: func() string {
+		generator: func() string {
 			return uuid.New().String()
 		},
 	}
@@ -32,7 +32,7 @@ func New(opts ...Option) gin.HandlerFunc {
 		// Get id from request
 		rid := c.GetHeader(headerXRequestID)
 		if rid == "" {
-			rid = cfg.Generator()
+			rid = cfg.generator()
 			// Set the id to ensure that the requestid is in the request
 			c.Request.Header.Add(headerXRequestID, rid)
 		}
