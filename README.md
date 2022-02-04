@@ -17,11 +17,13 @@ func main() {
 
   r := gin.New()
 
-  r.Use(requestid.New(requestid.Config{
-    Generator: func() string {
-      return "test"
-    },
-  }))
+  r.Use(
+    requestid.New(
+      requestid.WithGenerator(func() string {
+        return "test"
+      }),
+    ),
+  )
 
   // Example ping request.
   r.GET("/ping", func(c *gin.Context) {
