@@ -8,33 +8,31 @@ import (
 const headerXRequestID = "X-Request-ID"
 
 // Config defines the config for RequestID middleware
-type Config struct {
+type config struct {
 	// Generator defines a function to generate an ID.
 	// Optional. Default: func() string {
 	//   return uuid.New().String()
 	// }
-	Generator func() string
+	generator Generator
 }
 
 // New initializes the RequestID middleware.
-func New(config ...Config) gin.HandlerFunc {
-	var cfg Config
-	if len(config) > 0 {
-		cfg = config[0]
+func New(opts ...Option) gin.HandlerFunc {
+	cfg := &config{
+		generator: func() string {
+			return uuid.New().String()
+		},
 	}
 
-	// Set config default values
-	if cfg.Generator == nil {
-		cfg.Generator = func() string {
-			return uuid.New().String()
-		}
+	for _, opt := range opts {
+		opt(cfg)
 	}
 
 	return func(c *gin.Context) {
 		// Get id from request
 		rid := c.GetHeader(headerXRequestID)
 		if rid == "" {
-			rid = cfg.Generator()
+			rid = cfg.generator()
 			// Set the id to ensure that the requestid is in the request
 			c.Request.Header.Add(headerXRequestID, rid)
 		}
