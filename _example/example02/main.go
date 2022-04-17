@@ -18,6 +18,7 @@ func main() {
 			requestid.WithGenerator(func() string {
 				return "test"
 			}),
+			requestid.WithCustomHeaderStrKey("your-customer-key"),
 		),
 	)
 
