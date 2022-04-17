@@ -7,7 +7,7 @@ type Generator func() string
 
 type HeaderStrKey string
 
-// WithGenerator set fenerator function
+// WithGenerator set generator function
 func WithGenerator(g Generator) Option {
 	return func(cfg *config) {
 		cfg.generator = g
