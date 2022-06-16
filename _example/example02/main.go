@@ -19,6 +19,9 @@ func main() {
 				return "test"
 			}),
 			requestid.WithCustomHeaderStrKey("your-customer-key"),
+			requestid.WithHandler(func(c *gin.Context, requestID string) {
+				log.Printf("RequestID: %s", requestID)
+			}),
 		),
 	)
 

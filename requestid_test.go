@@ -79,3 +79,23 @@ func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, testXRequestID, w.Header().Get("customKey"))
 }
+
+func TestRequestIDWithHandler(t *testing.T) {
+	r := gin.New()
+	called := false
+	r.Use(
+		New(
+			WithHandler(func(c *gin.Context, requestID string) {
+				called = true
+				assert.Equal(t, testXRequestID, requestID)
+			}),
+		),
+	)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
+	req.Header.Set("X-Request-ID", testXRequestID)
+	r.ServeHTTP(w, req)
+
+	assert.True(t, called)
+}

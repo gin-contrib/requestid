@@ -15,6 +15,7 @@ type config struct {
 	// }
 	generator Generator
 	headerKey HeaderStrKey
+	handler   Handler
 }
 
 // New initializes the RequestID middleware.
@@ -37,6 +38,9 @@ func New(opts ...Option) gin.HandlerFunc {
 			rid = cfg.generator()
 		}
 		headerXRequestID = string(cfg.headerKey)
+		if cfg.handler != nil {
+			cfg.handler(c, rid)
+		}
 		// Set the id to ensure that the requestid is in the response
 		c.Header(headerXRequestID, rid)
 		c.Next()
