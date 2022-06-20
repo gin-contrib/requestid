@@ -7,8 +7,10 @@ import (
 // Option for queue system
 type Option func(*config)
 
-type Generator func() string
-type Handler func(c *gin.Context, requestID string)
+type (
+	Generator func() string
+	Handler   func(c *gin.Context, requestID string)
+)
 
 type HeaderStrKey string
 
