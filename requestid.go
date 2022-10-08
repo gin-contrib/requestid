@@ -31,13 +31,14 @@ func New(opts ...Option) gin.HandlerFunc {
 		opt(cfg)
 	}
 
+	headerXRequestID = string(cfg.headerKey)
+
 	return func(c *gin.Context) {
 		// Get id from request
-		rid := c.GetHeader(string(cfg.headerKey))
+		rid := c.GetHeader(headerXRequestID)
 		if rid == "" {
 			rid = cfg.generator()
 		}
-		headerXRequestID = string(cfg.headerKey)
 		if cfg.handler != nil {
 			cfg.handler(c, rid)
 		}
