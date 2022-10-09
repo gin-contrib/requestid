@@ -38,6 +38,7 @@ func New(opts ...Option) gin.HandlerFunc {
 		rid := c.GetHeader(headerXRequestID)
 		if rid == "" {
 			rid = cfg.generator()
+			c.Request.Header.Add(headerXRequestID, rid)
 		}
 		if cfg.handler != nil {
 			cfg.handler(c, rid)

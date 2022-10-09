@@ -99,3 +99,18 @@ func TestRequestIDWithHandler(t *testing.T) {
 
 	assert.True(t, called)
 }
+
+func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
+	r := gin.New()
+
+	r.Use(New())
+
+	r.GET("/", func(c *gin.Context) {
+		result := c.GetHeader("X-Request-ID")
+		assert.NotEmpty(t, result)
+	})
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
+	r.ServeHTTP(w, req)
+}
