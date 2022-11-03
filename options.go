@@ -21,7 +21,7 @@ func WithGenerator(g Generator) Option {
 	}
 }
 
-// WithCustomeHeaderStrKey set custom header key for request id
+// WithCustomHeaderStrKey set custom header key for request id
 func WithCustomHeaderStrKey(s HeaderStrKey) Option {
 	return func(cfg *config) {
 		cfg.headerKey = s

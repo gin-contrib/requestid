@@ -5,6 +5,8 @@ import (
 	"github.com/google/uuid"
 )
 
+const defaultHeaderKey = "X-Request-ID"
+
 var headerXRequestID string
 
 // Config defines the config for RequestID middleware
@@ -24,7 +26,7 @@ func New(opts ...Option) gin.HandlerFunc {
 		generator: func() string {
 			return uuid.New().String()
 		},
-		headerKey: "X-Request-ID",
+		headerKey: defaultHeaderKey,
 	}
 
 	for _, opt := range opts {

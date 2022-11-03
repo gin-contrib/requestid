@@ -106,7 +106,7 @@ func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 	r.Use(New())
 
 	r.GET("/", func(c *gin.Context) {
-		result := c.GetHeader("X-Request-ID")
+		result := c.GetHeader(defaultHeaderKey)
 		assert.NotEmpty(t, result)
 	})
 
