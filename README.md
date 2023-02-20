@@ -78,9 +78,15 @@ r.GET("/", func(c *gin.Context) {
 
 ```mermaid
 graph TB
-    A(接口请求) --> B[参数校验]
-    B[参数校验] --> C{校验通过?}
-    C{校验通过?} -- 通过 --> d[处理业务逻辑]
-    C{校验不通过} -- 不通过 --> e[结束]
-    d[处理业务逻辑] --> e(结束)
+  demo[demo] --> github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12]
+  demo[demo] --> github.com/modern-go/concurrent@v0.0.0-20180228061459-e0a39a4cb421[github.com/modern-go/concurrent@v0.0.0-20180228061459-e0a39a4cb421]
+  demo[demo] --> github.com/modern-go/reflect2@v1.0.2[github.com/modern-go/reflect2@v1.0.2]
+  github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12] --> github.com/davecgh/go-spew@v1.1.1[github.com/davecgh/go-spew@v1.1.1]
+  github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12] --> github.com/google/gofuzz@v1.0.0[github.com/google/gofuzz@v1.0.0]
+  github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12] --> github.com/modern-go/concurrent@v0.0.0-20180228061459-e0a39a4cb421[github.com/modern-go/concurrent@v0.0.0-20180228061459-e0a39a4cb421]
+  github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12] --> github.com/modern-go/reflect2@v1.0.2[github.com/modern-go/reflect2@v1.0.2]
+  github.com/json-iterator/go@v1.1.12[github.com/json-iterator/go@v1.1.12] --> github.com/stretchr/testify@v1.3.0[github.com/stretchr/testify@v1.3.0]
+  github.com/stretchr/testify@v1.3.0[github.com/stretchr/testify@v1.3.0] --> github.com/davecgh/go-spew@v1.1.0[github.com/davecgh/go-spew@v1.1.0]
+  github.com/stretchr/testify@v1.3.0[github.com/stretchr/testify@v1.3.0] --> github.com/pmezard/go-difflib@v1.0.0[github.com/pmezard/go-difflib@v1.0.0]
+  github.com/stretchr/testify@v1.3.0[github.com/stretchr/testify@v1.3.0] --> github.com/stretchr/objx@v0.1.0[github.com/stretchr/objx@v0.1.0]
 ```
