@@ -8,6 +8,21 @@
 
 Request ID middleware for Gin Framework. Adds an indentifier to the response using the `X-Request-ID` header. Passes the `X-Request-ID` value back to the caller if it's sent in the request headers.
 
+## Usage
+
+### Start using it
+
+Download and install it:
+
+```sh
+go get github.com/gin-contrib/requestid
+```
+
+Import it in your code:
+
+````go
+import "github.com/gin-contrib/requestid"
+
 ## Config
 
 define your custom generator function:
@@ -34,7 +49,7 @@ func main() {
   // Listen and Server in 0.0.0.0:8080
   r.Run(":8080")
 }
-```
+````
 
 ## Example
 
