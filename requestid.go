@@ -51,5 +51,5 @@ func New(opts ...Option) gin.HandlerFunc {
 
 // Get returns the request identifier
 func Get(c *gin.Context) string {
-	return c.Writer.Header().Get(headerXRequestID)
+	return c.GetHeader(headerXRequestID)
 }

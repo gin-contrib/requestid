@@ -114,3 +114,18 @@ func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	r.ServeHTTP(w, req)
 }
+
+func TestRequestIDNotNilAfterGinCopy(t *testing.T) {
+	r := gin.New()
+	r.Use(New())
+
+	r.GET("/", func(c *gin.Context) {
+		copy := c.Copy()
+		result := Get(copy)
+		assert.NotEmpty(t, result)
+	})
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
+	r.ServeHTTP(w, req)
+}
