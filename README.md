@@ -20,9 +20,9 @@ go get github.com/gin-contrib/requestid
 
 Import it in your code:
 
-````go
+```go
 import "github.com/gin-contrib/requestid"
-
+```
 ## Config
 
 define your custom generator function:
