@@ -12,17 +12,18 @@ Request ID middleware for Gin Framework. Adds an indentifier to the response usi
 
 ### Start using it
 
-Download and install it:
+Download and install it.
 
 ```sh
 go get github.com/gin-contrib/requestid
 ```
 
-Import it in your code:
+Import it in your code, then use it:
 
 ```go
 import "github.com/gin-contrib/requestid"
 ```
+
 ## Config
 
 define your custom generator function:
