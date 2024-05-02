@@ -93,7 +93,7 @@ r.GET("/", func(c *gin.Context) {
 
 You can also get the request identifier from response header:
 
-```
+```sh
 > curl -i "http://127.0.0.1:8080"
 
 HTTP/1.1 200 OK
@@ -106,7 +106,7 @@ id:77966910-3912-4193-9b74-267491c51700
 
 When http request with custom identifier, gin server return the custom identifier in response header.
 
-```
+```sh
 > curl -i -H "X-Request-ID:test" "http://127.0.0.1:8080"
 
 HTTP/1.1 200 OK
