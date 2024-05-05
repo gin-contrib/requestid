@@ -1,8 +1,5 @@
 builds:
-  - # If true, skip the build.
-    # Useful for library projects.
-    # Default is false
-    skip: true
+  - skip: true
 
 changelog:
   use: github
