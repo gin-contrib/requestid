@@ -111,7 +111,7 @@ When http request with custom identifier, gin server return the custom identifie
 
 HTTP/1.1 200 OK
 Content-Type: text/plain; charset=utf-8
-X-Request-Id: 1688221042
+X-Request-Id: test
 Content-Length: 13
 
 id:test
