@@ -3,7 +3,7 @@
 [![Run Tests](https://github.com/gin-contrib/requestid/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/gin-contrib/requestid/actions/workflows/go.yml)
 [![Trivy Security Scan](https://github.com/gin-contrib/requestid/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/gin-contrib/requestid/actions/workflows/trivy-scan.yml)
 [![codecov](https://codecov.io/gh/gin-contrib/requestid/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-contrib/requestid)
-[![GoDoc](https://godoc.org/github.com/gin-contrib/requestid?status.svg)](https://godoc.org/github.com/gin-contrib/requestid)
+[![Go Reference](https://pkg.go.dev/badge/github.com/gin-contrib/requestid.svg)](https://pkg.go.dev/github.com/gin-contrib/requestid)
 
 Request ID middleware for Gin Framework. Adds an indentifier to the response using the `X-Request-ID` header. Passes the `X-Request-ID` value back to the caller if it's sent in the request headers.
 
