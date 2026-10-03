@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-contrib/requestid"
+
 	"github.com/gin-gonic/gin"
 )
 
