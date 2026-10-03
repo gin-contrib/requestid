@@ -2,8 +2,10 @@ package requestid
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"sync"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -78,6 +80,74 @@ func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, testXRequestID, w.Header().Get("customKey"))
+}
+
+func TestRequestIDWithCustomHeaderKeysAreIndependent(t *testing.T) {
+	const (
+		firstHeader  = "X-Request-ID-First"
+		secondHeader = "X-Request-ID-Second"
+		firstID      = "first-request-id"
+		secondID     = "second-request-id"
+	)
+
+	firstRouter := gin.New()
+	firstRouter.Use(New(WithCustomHeaderStrKey(firstHeader)))
+	firstRouter.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, Get(c))
+	})
+
+	secondRouter := gin.New()
+	secondRouter.Use(New(WithCustomHeaderStrKey(secondHeader)))
+	secondRouter.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, Get(c))
+	})
+
+	tests := []struct {
+		name      string
+		router    *gin.Engine
+		headerKey string
+		requestID string
+	}{
+		{name: "first router", router: firstRouter, headerKey: firstHeader, requestID: firstID},
+		{name: "second router", router: secondRouter, headerKey: secondHeader, requestID: secondID},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+			req.Header.Set(tt.headerKey, tt.requestID)
+
+			tt.router.ServeHTTP(w, req)
+
+			assert.Equal(t, http.StatusOK, w.Code)
+			assert.Equal(t, tt.requestID, w.Header().Get(tt.headerKey))
+			assert.Equal(t, tt.requestID, w.Body.String())
+		})
+	}
+}
+
+func TestNewConcurrent(t *testing.T) {
+	const goroutines = 16
+
+	start := make(chan struct{})
+	var wg sync.WaitGroup
+	wg.Add(goroutines)
+
+	for i := range goroutines {
+		headerKey := HeaderStrKey(fmt.Sprintf("X-Request-ID-%d", i))
+		go func() {
+			defer wg.Done()
+			<-start
+
+			for range 100 {
+				New(WithCustomHeaderStrKey(headerKey))
+			}
+		}()
+	}
+
+	close(start)
+	wg.Wait()
 }
 
 func TestRequestIDWithHandler(t *testing.T) {
