@@ -1,7 +1,6 @@
 package requestid
 
 import (
-	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -22,7 +21,7 @@ func Test_RequestID_CreateNew(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
@@ -35,7 +34,7 @@ func Test_RequestID_PassThru(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	req.Header.Set(headerXRequestID, testXRequestID)
 	r.ServeHTTP(w, req)
 
@@ -55,7 +54,7 @@ func TestRequestIDWithCustomID(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	r.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
@@ -72,7 +71,7 @@ func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 	r.GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	req.Header.Set("customKey", testXRequestID)
 	r.ServeHTTP(w, req)
 
@@ -93,7 +92,7 @@ func TestRequestIDWithHandler(t *testing.T) {
 	)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	req.Header.Set("X-Request-ID", testXRequestID)
 	r.ServeHTTP(w, req)
 
@@ -111,7 +110,7 @@ func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 	})
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	r.ServeHTTP(w, req)
 }
 
@@ -126,6 +125,6 @@ func TestRequestIDNotNilAfterGinCopy(t *testing.T) {
 	})
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, "/", nil)
+	req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, "/", nil)
 	r.ServeHTTP(w, req)
 }
